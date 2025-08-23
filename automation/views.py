@@ -55,7 +55,8 @@ def apply_discount_view(request):
                 page.fill("input#carNo", car_number)
                 page.click("a#carList")
 
-                result_message = "차량 번호 검색 "
+                time.sleep(1)
+
 
                 if page.is_visible('tbody.car-number_list:has-text("조회된 데이터가 없습니다.")'):
                     result_message = "차량 조회 실패: 등록되지 않은 차량입니다. 다시 확인해주세요."

@@ -24,4 +24,4 @@ EXPOSE 8000
 
 # 8. 컨테이너가 시작될 때 실행할 명령어
 # 실제 운영 환경에서는 Gunicorn을 사용하는 것이 표준입니다.
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "bucheonparking.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000","--timeout", "120", "bucheonparking.wsgi:application"]
