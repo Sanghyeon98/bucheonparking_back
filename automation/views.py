@@ -23,7 +23,7 @@ def apply_discount_view(request):
 
         try:
             with sync_playwright() as p:
-                browser = p.chromium.launch(headless=False)
+                browser = p.chromium.launch(headless=True)
                 page = browser.new_page()
 
                 # 1. 원래 사이트(주차 사이트) 에서 시작
