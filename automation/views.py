@@ -23,13 +23,11 @@ def apply_discount_view(request):
 
         try:
             with sync_playwright() as p:
-                browser = p.chromium.launch(headless=True)
+                browser = p.chromium.launch(headless=False)
                 page = browser.new_page()
 
                 # 1. 원래 사이트(주차 사이트) 에서 시작
-                page.goto("https://parking.bcits.go.kr/main/main.do")
-
-                page.click("a[href='/user/login.do']")
+                page.goto("https://parking.bcits.go.kr/user/login.do")
 
                 # 3. 통합로그인(SSO) 페이지로 넘어갈 때까지 기다림
                 #    ID 입력창이 보일 때까지 기다리는 것이 가장 확실합니다.
@@ -45,7 +43,8 @@ def apply_discount_view(request):
 
                 # 5. 다시 원래 사이트로 돌아올 때까지 기다림
                 #    '로그아웃' 버튼이 보이면 로그인이 성공한 것입니다.
-                page.wait_for_selector("div.ico_login[style*='display: block']")
+                time.sleep(1)
+                # page.wait_for_selector("div.ico_login[style*='display: block']")
                 print("주차 사이트로 복귀 및 로그인 성공.")
 
                 # 6. 이제 소상공인 할인 페이지 이동
